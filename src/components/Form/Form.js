@@ -11,6 +11,15 @@ class Form extends Component{
       price: '',
     }
     this.inputOnChange = this.inputOnChange.bind(this)
+    this.buttonOnClick = this.buttonOnClick.bind(this)
+  }
+
+  clearState(){
+    this.setState({
+      image: defaultPic,
+      name: '',
+      price: '',
+    })
   }
 
   inputOnChange(input, value){
@@ -22,13 +31,10 @@ class Form extends Component{
 
   buttonOnClick(buttonID){
     if(buttonID === 'Cancel'){
-      this.setState({
-        image: defaultPic,
-        name: '',
-        price: '',
-      })
+      this.clearState()
     } else if (buttonID === 'Add'){
-      console.log(`Waiting on Fuctionality`)
+      this.props.createProduct(this.state.name,this.state.price,this.state.image)
+      // this.clearState()
     }
   }
 

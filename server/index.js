@@ -14,6 +14,8 @@ app.use(cors())
 
 
 app.get('/api/inventory' , ctrl.get_inventory)
+app.post('/api/product' , ctrl.post_product)
+app.delete('/api/delete/:id' , ctrl.delete_product)
 
 
 
