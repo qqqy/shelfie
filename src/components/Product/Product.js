@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function(props){
   const { id, name, img, price } = props.productOb
@@ -13,7 +14,7 @@ export default function(props){
         </div>
         <div className='delete-and-edit'>
           <div><button onClick={() => props.handleOnClick(id,'delete')}>Delete</button></div>
-          <div><button onClick={() => props.handleOnClick(id,'edit')}>Edit</button></div>
+          <div><Link to={`/edit/${id}`}><button>Edit</button></Link></div>
         </div>
       </div>
   

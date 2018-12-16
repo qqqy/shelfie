@@ -1,7 +1,16 @@
 module.exports = {
   get_inventory: function(req, res){
+    // let optionalClause = '';
+    console.log('get_inventory invoked')
     const db = req.app.get('db')
-    db.get_inventory().then(inventoryOb => res.status(200).send(inventoryOb)).catch(err => err.message)
+    if(req.query.id){
+      console.log('There was a query')
+      db.get_product(req.query)
+      .then(inventoryOb => res.status(200).send(inventoryOb)).catch(err => err.message)
+    } else {
+      console.log('No Query, sending all')
+      db.get_inventory()
+      .then(inventoryOb => res.status(200).send(inventoryOb)).catch(err => err.message)}
   } ,
 
   post_product: function(req,res){
