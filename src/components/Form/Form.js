@@ -9,9 +9,28 @@ class Form extends Component{
       image: defaultPic,
       name: '' ,
       price: '',
+      currentProduct: null,
+      rightButtonText: 'Add to Inventory'
     }
     this.inputOnChange = this.inputOnChange.bind(this)
     this.buttonOnClick = this.buttonOnClick.bind(this)
+    this.componentDidUpdate = this.componentDidUpdate.bind(this)
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.currentProduct !== this.props.currentProduct){
+      console.log('Target Changed')
+      const {name, id, img, price} = this.props.currentProduct
+      this.setState({
+        rightButtonText: 'Save Changes',
+        name: name,
+        currentProduct: id,
+        price: price,
+        image: img
+      })
+      
+    }
+
   }
 
   clearState(){
@@ -19,6 +38,8 @@ class Form extends Component{
       image: defaultPic,
       name: '',
       price: '',
+      currentProduct: null,
+      rightButtonText: 'Add to Inventory'
     })
   }
 
@@ -26,15 +47,22 @@ class Form extends Component{
     this.setState({
       [input]: value
     })
-    console.log(this.state[input])
+    // console.log(this.state[input])
   }
 
   buttonOnClick(buttonID){
     if(buttonID === 'Cancel'){
       this.clearState()
-    } else if (buttonID === 'Add'){
+    } else if (buttonID === 'Add' && this.state.currentProduct === null){
       this.props.createProduct(this.state.name,this.state.price,this.state.image)
+      // console.log(this.state.currentProduct)
       // this.clearState()
+    } else if (buttonID === 'Add' && this.state.currentProduct !== null){
+      // console.log('Edit invoked on ' , this.state.currentProduct)
+      const {name, price, image, currentProduct} = this.state
+      // console.log(name , price , image )
+      this.props.saveChanges(currentProduct,{name: name, price: price, img: image})
+      this.clearState()
     }
   }
 
@@ -66,7 +94,7 @@ class Form extends Component{
 
         <div>
           <button onClick={() => this.buttonOnClick('Cancel')}>Cancel</button>
-          <button onClick={() => this.buttonOnClick('Add')}>Add to Inventory</button>
+          <button onClick={() => this.buttonOnClick('Add')}>{this.state.rightButtonText}</button>
           
         </div>
       </div>

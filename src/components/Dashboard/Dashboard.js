@@ -21,10 +21,9 @@ class Dashboard extends Component{
         .catch(err => console.log(err.message))
     } else if (buttonID === 'edit'){
       console.log('HOC: edit invoked on ' + productID)
-      let targetObAr = this.props.products.filter((prodOb) => prodOb.id === productID)
       // console.log(targetObAr)
-      this.setState({ onEditOb: targetObAr[0] })
-      setTimeout(console.log('onEditOb is now ', this.state.onEditOb), 3000)
+      this.props.editProduct(productID)
+      // setTimeout(console.log('onEditOb is now ', this.state.onEditOb), 3000)
     }
   }
 
@@ -33,6 +32,7 @@ class Dashboard extends Component{
     <Product
       productOb ={product}
       handleOnClick={this.handleOnClick}
+      editProduct={this.props.editProduct}
      />
     </div>))
     return(

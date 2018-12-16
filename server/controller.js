@@ -15,10 +15,21 @@ module.exports = {
 
   delete_product: function(req, res){
     const db = req.app.get('db')
-    res.send("delete_product invoked on "+req.params.id)
+    // res.send("delete_product invoked on "+req.params.id)
     db.delete_product({id: req.params.id})
       .then(() => res.sendStatus(200))
       .catch(err => res.send(err.message))
+  } ,
+
+  edit_product: function(req, res){
+    let db = req.app.get('db')
+    db.edit_product({
+      id: req.params.id,
+      name: req.body.name ,
+      price: req.body.price ,
+      img: req.body.img
+    })
+      .then(() => res.sendStatus(200)).catch(err => res.send(err))
   }
   
 }
