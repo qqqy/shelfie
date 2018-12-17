@@ -52,7 +52,7 @@ class Dashboard extends Component{
      />
     </div>))
     return(
-      <div>Dashboard
+      <div className='dashboard-main'>
         {products}
       </div>
     )

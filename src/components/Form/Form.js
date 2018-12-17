@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link , Redirect } from 'react-router-dom'
 import axios from 'axios'
 
-const defaultPic = 'https://www.capitalfm.co.ke/lifestyle/files/mobile/2018/10/web-mr-bean-atkinson-bbc-uk-600x400.jpg'
+// const defaultPic = 'https://www.capitalfm.co.ke/lifestyle/files/mobile/2018/10/web-mr-bean-atkinson-bbc-uk-600x400.jpg'
+const defaultPic = 'https://upload.wikimedia.org/wikipedia/commons/3/38/Tampa_FL_Sulphur_Springs_Tower_tall_pano01.jpg'
 
 class Form extends Component{
   constructor(props){
@@ -111,6 +112,9 @@ class Form extends Component{
     return(
       <div>
         {redirect}
+        <div className="product-image">
+          <img src={this.state.image} alt={this.state.name}/>
+        </div>
         <div>
           <input 
             onChange={(e) => this.inputOnChange('image', e.target.value)}
